@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{Intelligent Systems}
+\author{Anton Obersteiner}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{API}
+\begin{itemize}
+	\item EC/RN numbers: ingredient / reagent identifiers
+		can be mapped by fda to names and synonyms
+	\item major topic: pharmacology
+	\item hm: "Humans", ...
+	\item rn: "R2o4d3049 (Aspirin)", ...
+		synonyms by fda
+\end{itemize}
+
+\subsection{preprocessing}
+\begin{itemize}
+	\item remove most common words? except useful ones ("not")
+\end{itemize}
+
+
+\section{classifying data}
+\subsection{is word a medication}
+basis: list of classified
+
+\subsubsection{context}
+\begin{itemize}
+	\item find word $W$
+	\item count neighboring words $w_i$
+	\item (weighted $\delta(d)$ by distance $d$?)
+	\item into context $C$; see Equation \ref{eq:context}
+	\item ! normalize
+	\item -> classify and test on medication and non-medication
+\end{itemize}
+
+\begin{align}
+	C_W(w_i) = \sum_{\text{each $w_i$ near $W$}} \delta(d) \label{eq:context}
+\end{align}
+
+\subsubsection{markov?}
+
+\subsubsection{mapping words to vectors}
+\begin{itemize}
+	\item might easily lead to overfitting
+	\item NN or list?
+\end{itemize}
+
+
+\subsection{todo}
+\begin{itemize}
+	\item fda-api
+	\item paper filtern -> limits
+\end{itemize}
+
+\section{target application}
+map disease string (name or name matching, subwortsuche)
+\begin{itemize}
+	\item to drug list in order of applicability
+		e.g. link strength/text positivity
+	\item and link to source text
+		(by paper id and position on text as percent float)
+\end{itemize}
+
+\end{document}
